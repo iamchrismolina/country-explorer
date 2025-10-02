@@ -8,18 +8,18 @@ export function useTheme() {
 
   const [currentTheme, setCurrentTheme] = useState(storedTheme ?? "light")
   const [themeIcon, setThemeIcon] = useState(
-    currentTheme === "light" ? "sun" : "moon",
+    storedTheme === "dark" ? "moon" : "sun",
   )
 
   useEffect(() => {
     document.documentElement.classList.toggle(
       "dark",
-      localStorage.theme === "light" ||
+      localStorage.theme === "dark" ||
         (!("theme" in localStorage) &&
           window.matchMedia(`(prefers-color-scheme: ${currentTheme})`).matches),
     )
     localStorage.setItem("theme", currentTheme)
-    if (currentTheme === "dark") {
+    if (currentTheme === "light") {
       setThemeIcon("sun")
     } else {
       setThemeIcon("moon")
@@ -27,10 +27,10 @@ export function useTheme() {
   }, [currentTheme, themeIcon, setCurrentTheme])
 
   const changeTheme = () => {
-    if (currentTheme === "dark") {
-      setCurrentTheme("light")
-    } else {
+    if (currentTheme === "light") {
       setCurrentTheme("dark")
+    } else {
+      setCurrentTheme("light")
     }
   }
 

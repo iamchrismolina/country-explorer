@@ -1,5 +1,16 @@
 import { z } from "zod"
 
+const RegionEnum = z.enum([
+  "Asia",
+  "Europe",
+  "Africa",
+  "Oceania",
+  "Americas",
+  "Polar",
+  "Antarctic Ocean",
+  "Antarctic",
+])
+
 export const FlagsSchema = z.object({
   svg: z.string().url().optional(),
   png: z.string().url().optional(),
@@ -36,8 +47,8 @@ export const CountrySchema = z.object({
   capital: z.string().optional(),
   altSpellings: z.array(z.string()).optional(),
   subregion: z.string().optional(),
-  region: z.string().optional(),
-  population: z.number().optional(),
+  region: RegionEnum,
+  population: z.number(),
   latlng: z.array(z.number()).length(2).optional(),
   demonym: z.string().optional(),
   area: z.number().optional(),
@@ -50,7 +61,7 @@ export const CountrySchema = z.object({
   currencies: z.array(CurrencySchema).optional(),
   languages: z.array(LanguageSchema).optional(),
   translations: TranslationsSchema.optional(),
-  flag: z.string().url().optional(),
+  flag: z.string().url(),
   regionalBlocs: z.array(RegionalBlocSchema).optional(),
   cioc: z.string().optional(),
   independent: z.boolean().optional(),
@@ -58,5 +69,6 @@ export const CountrySchema = z.object({
 
 export const CountriesSchema = z.array(CountrySchema)
 
+export type Region = z.infer<typeof RegionEnum>
 export type Country = z.infer<typeof CountrySchema>
 export type Countries = z.infer<typeof CountriesSchema>

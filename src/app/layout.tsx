@@ -1,3 +1,6 @@
+"use client"
+
+import Header from "@/components/header"
 import { Nunito_Sans } from "next/font/google"
 import Head from "next/head"
 import "./globals.css"
@@ -21,6 +24,7 @@ export default function RootLayout({
       <body
         className={`${nunitoSans.className} bg-gray-50 antialiased dark:bg-slate-800`}
       >
+        <Header />
         {children}
       </body>
     </html>
