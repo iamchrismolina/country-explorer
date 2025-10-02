@@ -1,21 +1,11 @@
-import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google"
+import { Nunito_Sans } from "next/font/google"
+import Head from "next/head"
 import "./globals.css"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const nunitoSans = Nunito_Sans({
   subsets: ["latin"],
+  display: "swap",
 })
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-
-export const metadata: Metadata = {
-  title: "Country Explorer",
-  description: "An app to quickly find country flags",
-}
 
 export default function RootLayout({
   children,
@@ -23,9 +13,13 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html className="dark" lang="en">
+      <Head>
+        <title>Country Explorer</title>
+        <p>An app to quickly find country flags</p>
+      </Head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${nunitoSans.className} bg-gray-50 antialiased dark:bg-slate-800`}
       >
         {children}
       </body>
